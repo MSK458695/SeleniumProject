@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.9.9.dtd">
+<suite name="AutomationSuite">
+  <test name="FirstTest">
+    <classes>
+      <class name="com.automation.AppTest"/>
+    </classes>
+  </test>
+</suite>
