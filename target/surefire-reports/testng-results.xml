@@ -2,19 +2,35 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-03T09:15:56 IST" name="AutomationSuite" finished-at="2026-06-03T09:16:30 IST" duration-ms="33359">
+  <suite started-at="2026-06-03T09:26:41 IST" name="AutomationSuite" finished-at="2026-06-03T09:27:38 IST" duration-ms="57438">
     <groups>
     </groups>
-    <test started-at="2026-06-03T09:15:56 IST" name="FirstTest" finished-at="2026-06-03T09:16:30 IST" duration-ms="33359">
+    <test started-at="2026-06-03T09:26:41 IST" name="FirstTest" finished-at="2026-06-03T09:27:38 IST" duration-ms="57438">
       <class name="com.automation.AppTest">
-        <test-method signature="loginTest()[pri:0, instance:com.automation.AppTest@1700915]" started-at="2026-06-03T09:15:57 IST" name="loginTest" finished-at="2026-06-03T09:16:18 IST" duration-ms="21607" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.automation.AppTest@1725dc0f]" started-at="2026-06-03T09:26:41 IST" name="setup" finished-at="2026-06-03T09:27:09 IST" duration-ms="28800" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="loginTest()[pri:0, instance:com.automation.AppTest@1725dc0f]" started-at="2026-06-03T09:27:09 IST" name="loginTest" finished-at="2026-06-03T09:27:11 IST" duration-ms="1615" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginTest -->
-        <test-method signature="wrongPasswordTest()[pri:0, instance:com.automation.AppTest@1700915]" started-at="2026-06-03T09:16:18 IST" name="wrongPasswordTest" finished-at="2026-06-03T09:16:30 IST" duration-ms="11672" status="PASS">
+        <test-method is-config="true" signature="teardown()[pri:0, instance:com.automation.AppTest@1725dc0f]" started-at="2026-06-03T09:27:11 IST" name="teardown" finished-at="2026-06-03T09:27:12 IST" duration-ms="495" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.automation.AppTest@1725dc0f]" started-at="2026-06-03T09:27:12 IST" name="setup" finished-at="2026-06-03T09:27:31 IST" duration-ms="19345" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="wrongPasswordTest()[pri:0, instance:com.automation.AppTest@1725dc0f]" started-at="2026-06-03T09:27:31 IST" name="wrongPasswordTest" finished-at="2026-06-03T09:27:38 IST" duration-ms="6726" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- wrongPasswordTest -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:com.automation.AppTest@1725dc0f]" started-at="2026-06-03T09:27:38 IST" name="teardown" finished-at="2026-06-03T09:27:38 IST" duration-ms="359" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
       </class> <!-- com.automation.AppTest -->
     </test> <!-- FirstTest -->
   </suite> <!-- AutomationSuite -->

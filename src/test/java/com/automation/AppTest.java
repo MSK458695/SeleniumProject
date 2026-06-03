@@ -7,65 +7,56 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class AppTest {
 
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @BeforeMethod
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.get("https://opensource-demo.orangehrmlive.com/");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        System.out.println("Browser opened");
+    }
+
+    @AfterMethod
+    public void teardown() {
+        driver.quit();
+        System.out.println("Browser closed");
+    }
+
     @Test
     public void loginTest() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://opensource-demo.orangehrmlive.com/");
-        
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        
-        // Login
-        WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
+        WebElement username = wait.until(ExpectedConditions
+            .visibilityOfElementLocated(By.name("username")));
         username.sendKeys("Admin");
-        
-        WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys("admin123");
-        
-        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        loginButton.click();
-        
-        // Wait for dashboard to load
+
+        driver.findElement(By.name("password")).sendKeys("admin123");
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+
         wait.until(ExpectedConditions.titleContains("OrangeHRM"));
-        
-        // ASSERTION - verify login was successful
-        String actualTitle = driver.getTitle();
-        String expectedTitle = "OrangeHRM";
-        
-        Assert.assertEquals(actualTitle, expectedTitle);
-        System.out.println("Login successful. Title verified: " + actualTitle);
-        
-        driver.quit();
+        Assert.assertEquals(driver.getTitle(), "OrangeHRM");
+        System.out.println("Login test passed");
     }
-    
+
     @Test
     public void wrongPasswordTest() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://opensource-demo.orangehrmlive.com/");
-        
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        
-        // Login with wrong password
-        WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
+        WebElement username = wait.until(ExpectedConditions
+            .visibilityOfElementLocated(By.name("username")));
         username.sendKeys("Admin");
-        
-        WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys("wrongpassword");
-        
-        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        loginButton.click();
-        
-        // Verify error message appears
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.cssSelector(".oxd-alert-content-text")));
-        
-        Assert.assertTrue(errorMessage.isDisplayed());
-        System.out.println("Error message verified: " + errorMessage.getText());
-        
-        driver.quit();
+
+        driver.findElement(By.name("password")).sendKeys("wrongpassword");
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+
+        WebElement error = wait.until(ExpectedConditions
+            .visibilityOfElementLocated(By.cssSelector(".oxd-alert-content-text")));
+        Assert.assertTrue(error.isDisplayed());
+        System.out.println("Wrong password test passed: " + error.getText());
     }
 }
