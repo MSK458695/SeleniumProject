@@ -9,9 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.time.Duration;
-
+import org.testng.annotations.DataProvider;
 public class AppTest {
 
     WebDriver driver;
@@ -59,4 +60,34 @@ public class AppTest {
         Assert.assertTrue(error.isDisplayed());
         System.out.println("Wrong password test passed: " + error.getText());
     }
+
+    @DataProvider(name = "loginData")
+public Object[][] loginData() {
+    return new Object[][] {
+        {"Admin", "admin123", true},
+        {"Admin", "wrongpass", false},
+        {"wronguser", "admin123", false}
+    };
+}
+
+@Test(dataProvider = "loginData")
+public void dataDriverLoginTest(String username, String password, boolean shouldPass) {
+    WebElement usernameField = wait.until(ExpectedConditions
+        .visibilityOfElementLocated(By.name("username")));
+    usernameField.sendKeys(username);
+
+    driver.findElement(By.name("password")).sendKeys(password);
+    driver.findElement(By.cssSelector("button[type='submit']")).click();
+
+    if (shouldPass) {
+        wait.until(ExpectedConditions.titleContains("OrangeHRM"));
+        Assert.assertEquals(driver.getTitle(), "OrangeHRM");
+        System.out.println("Login passed for: " + username);
+    } else {
+        WebElement error = wait.until(ExpectedConditions
+            .visibilityOfElementLocated(By.cssSelector(".oxd-alert-content-text")));
+        Assert.assertTrue(error.isDisplayed());
+        System.out.println("Login failed as expected for: " + username);
+    }
+}
 }
